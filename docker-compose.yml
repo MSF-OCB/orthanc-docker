@@ -1,0 +1,30 @@
+---
+
+version: "3.5"
+
+services:
+
+  orthanc:
+    image: jodogne/orthanc-plugins:1.5.8
+    container_name: orthanc-container
+    hostname: orthanc
+    tmpfs: /tmp
+    entrypoint: /entrypoint.sh
+    restart: always
+    environment:
+      - ORTHANC_HTTP_PASSWORD=${orthanc_http_password}
+    ports:
+      - target: 4242
+        published: 104
+      - target: 8042
+        published: 8042
+    volumes:
+      - type: bind
+        source: ./entrypoint.sh
+        target: /entrypoint.sh
+        read_only: true
+      - type: bind
+        source: ./orthanc.json
+        target: /etc/orthanc/orthanc.json.tmpl
+        read_only: true
+
