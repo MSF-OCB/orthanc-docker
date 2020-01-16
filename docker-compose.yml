@@ -10,6 +10,7 @@ services:
     hostname: orthanc
     tmpfs: /tmp
     entrypoint: /entrypoint.sh
+    command: /etc/orthanc
     restart: always
     environment:
       - ORTHANC_HTTP_PASSWORD=${orthanc_http_password}
